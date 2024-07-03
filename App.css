@@ -1,0 +1,50 @@
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  background-color: black;
+  color: white;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 50%; /* Adjust width of form as needed */
+  margin-top: 20px; /* Example margin */
+  padding: 20px;
+  background-color: white; /* Example background color */
+  border-radius: 8px; /* Example border radius */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Example box shadow */
+}
+
+.table-main-container {
+  width: 80%; /* Adjust width of table container */
+  margin-top: 20px; /* Example margin */
+  background-color: white; /* Example background color */
+  border-radius: 8px; /* Example border radius */
+  overflow: hidden; /* Ensure overflow is hidden */
+}
+
+.table-head {
+  background-color: #333;
+  color: white;
+}
+
+.table-head td,
+.table-body td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.table-body td {
+  text-align: left;
+}
+
+.table-body td:first-child {
+  text-align: left; /* Adjust text alignment as needed */
+}
