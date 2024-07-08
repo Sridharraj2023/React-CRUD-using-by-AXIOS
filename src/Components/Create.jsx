@@ -10,6 +10,13 @@ const Create = () => {
     const [checked, setChecked] = useState(false);
 
     const postData = async () => {
+
+           // Check if any required field is empty
+        if (!firstName || !lastName || !checked) {
+            alert('Please fill out all fields and agree to the terms');
+            return;
+        }
+        
         try {
             await axios.post(API_URL, {
                 firstName,
