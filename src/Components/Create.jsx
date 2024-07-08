@@ -1,58 +1,69 @@
-import React, { useState } from 'react'
-import {API_URL} from '../Constants/URL'
-import{Form, Button, Checkbox} from 'semantic-ui-react'
-import './Create.css'
-import axios from 'axios'
+import React, { useState } from 'react';
+import { API_URL } from '../Constants/URL';
+import { Form, Button, Checkbox } from 'semantic-ui-react';
+import './Create.css';
+import axios from 'axios';
 
 const Create = () => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [checked, setChecked] = useState(false);
 
-    let postData = async () => {
+    const postData = async () => {
+        try {
+            await axios.post(API_URL, {
+                firstName,
+                lastName,
+                checked,
+            });
 
-        await axios.post(API_URL, {
+            // Reset input fields after successful submission
+            setFirstName('');
+            setLastName('');
+            setChecked(false);
 
-            firstName,
-            lastName,
-            checked,
+            // Optionally, you can show a success message or handle other logic after successful submission
+            console.log('Data submitted successfully!');
+        } catch (error) {
+            // Handle error, show an error message
+            console.error('Error submitting data:', error);
         }
-           
-    ); 
+    };
 
-    setFirstName("")
-    setLastName("")
-    setChecked(false)
+    return (
+        <Form className='form'>
+            <Form.Field>
+                <label>First Name: </label>
+                <input
+                    type="text"
+                    placeholder='Enter First Name'
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                />
+            </Form.Field>
 
-        // console.log(firstName);
-        // console.log(lastName);
-        // console.log(checked);
+            <Form.Field>
+                <label>Last Name: </label>
+                <input
+                    type="text"
+                    placeholder='Enter Last Name'
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                />
+            </Form.Field>
 
-    }
+            <Form.Field>
+                <Checkbox
+                    label='Agree to the terms and conditions'
+                    checked={checked}
+                    onChange={() => setChecked(!checked)}
+                />
+            </Form.Field>
 
+            <Button onClick={postData}>Submit</Button>
+        </Form>
+    );
+};
 
+export default Create;
 
-
-  return (
-    <Form className='form'>
-        <Form.Field>
-            <label>First Name: </label>
-            <input type="text" placeholder='Enter First Name' value={firstName} onChange={e => setFirstName(e.target.value)} />
-        </Form.Field> <br/>
-
-        <Form.Field>
-            <label>Last Name: </label>
-            <input type="text" placeholder='Enter Last Name' value={lastName} onChange={e => setLastName(e.target.value)} />
-        </Form.Field> <br/>
-
-        <Form.Field>
-            <Checkbox label='Agree the terms and conditions' checked={checked} onChange={() => setChecked(!checked) } />
-        </Form.Field> <br/>
-
-        <Button onClick={postData}>Sumbit</Button>
-
-    </Form>
-  )
-}
-
-export default Create
